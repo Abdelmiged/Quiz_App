@@ -1,0 +1,22 @@
+<div class="min-h-screen pt-12 bg-[#004643] bg-opacity-70">
+    <div class="container flex items-center flex-col">
+        <div class="w-28 h-28 md:w-36 md:h-36 mb-24 rounded-full flex justify-center items-center bg-white">
+            <span class="relative text-[#004643] text-2xl md:text-3xl font-semibold">
+                Quiz
+                <span class="absolute text-base md:text-xl text-[#F8C660] -bottom-[0.7rem] -right-[0.7rem] md:-bottom-[1rem] md:-right-[0.9rem]">App</span>
+            </span>
+        </div>
+        <div class="w-full">
+            <h2 class="text-center mb-4 text-xl lg:text-2xl font-semibold text-[#F8C660]">Choose number of Questions and Difficulty</h2>
+            <form [formGroup]="quizForm" class="w-3/4 lg:w-1/2 mx-auto" (ngSubmit)="startQuiz()">
+                <div class="w-full mb-4">
+                    <p-dropdown styleClass="w-full" formControlName="difficulty" [options]="difficulties" optionLabel="label" optionValue="value" placeholder="Select a Difficulty"></p-dropdown>
+                </div>
+                <div class="w-full mb-4">
+                    <p-dropdown styleClass="w-full" formControlName="number" [options]="numberOfQuestions" optionLabel="label" optionValue="value" placeholder="Select number of Questions"></p-dropdown>
+                </div>
+                <button class="w-1/2 p-2 font-semibold text-[#004643] text-xl mx-auto block bg-[#F8C660] hover:bg-[#d1a752]  transition rounded-md disabled:cursor-not-allowed" type="submit" [disabled]="this.quizForm.invalid">Start</button>
+            </form>
+        </div>
+    </div>
+</div>

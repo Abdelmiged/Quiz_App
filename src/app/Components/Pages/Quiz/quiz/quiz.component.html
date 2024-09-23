@@ -1,0 +1,83 @@
+@if(this._QuizData.currentQuestion.getValue() === this._QuizData.questions.results.length) {
+    <div class="fixed w-screen h-screen bg-gray-600 bg-opacity-50 z-10">
+        <div class="absolute w-40 h-40 rounded-md shadow-lg bg-white top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex justify-center items-center flex-col font-semibold">
+            <div class="mb-4">Your Score: {{this.score}}/{{this._QuizData.questions.results.length}}</div>
+            <button class="bg-[#004643] px-1 py-2 text-xl rounded-md transition-all hover:bg-[#1d6b67] text-white" routerLink="/home">Home</button>
+        </div>
+    </div>
+}
+<div class="min-h-screen py-4 bg-[#EFF0F3]">
+    <div class="container flex items-center flex-col">
+        <div class="w-full lg:w-3/4 mb-28">
+            <div class="w-full flex justify-between">
+                <button class="text-[#004643]" routerLink="/home"><i class="fa-solid fa-caret-left me-2"></i>Home</button>
+                <span class="font-semibold">{{(this._QuizData.currentQuestion.getValue() + 1 > this._QuizData.questions.results.length) ? this._QuizData.questions.results.length : (this._QuizData.currentQuestion.getValue() + 1) + "/" + this._QuizData.questions.results.length}}</span>
+            </div>
+        </div>
+        <div class="w-full lg:w-3/4">
+            <div class="bg-white relative px-8 py-16 rounded-md w-full shadow-lg font-semibold text-2xl mb-8">
+                <div class="w-24 h-24 absolute bottom-full left-1/2 -translate-x-1/2 translate-y-1/2 timer font-semibold text-xl">
+                    <div class="bg-white rounded-full w-full h-full flex justify-center items-center">
+                        <span class="text-4xl">{{this.time}}</span>
+                    </div>
+                </div>
+                <p class="lg:text-center">{{question.question | filterString}}</p>
+            </div>
+            <form class="w-full flex flex-col gap-y-4" [formGroup]="answersForm">
+                <div class="w-full h-14 px-6 font-semibold text-xl rounded-xl shadow-lg flex justify-between items-center bg-white relative cursor-pointer hover:bg-slate-300 transition-all">
+                    <input class="w-full h-full cursor-pointer rounded-lg appearance-none absolute top-0 left-0 disabled:cursor-not-allowed" type="radio" name="answer" [value]="this.answers[0]" (click)="choseAnswer($event)" formControlName="answer" #A>
+                    <span>{{this.answers[0] | filterString}}</span>
+                    @if(this.answersForm.value.answer === this.question.correct_answer && this.answersForm.value.answer === A.getAttribute("ng-reflect-value")) {
+                        <i class="fa-solid fa-circle-check text-[#006100cd]"></i>
+                    }
+                    @else if(this.answersForm.value.answer !== this.question.correct_answer && this.answersForm.value.answer !== "" && this.answersForm.value.answer === A.getAttribute("ng-reflect-value")) {
+                        <i class="fa-solid fa-circle-xmark text-[#771000e8]"></i>
+                    }
+                    @else {
+                        <i class="fa-regular fa-circle"></i>
+                    }
+                </div>
+                <div class="w-full h-14 px-6 font-semibold text-xl rounded-xl shadow-lg flex justify-between items-center bg-white relative cursor-pointer hover:bg-slate-300 transition-all">
+                    <input class="w-full h-full cursor-pointer rounded-lg appearance-none absolute top-0 left-0 disabled:cursor-not-allowed" type="radio" name="answer" [value]="this.answers[1]" (click)="choseAnswer($event)" formControlName="answer" #B>
+                    <span>{{this.answers[1] | filterString}}</span>
+                    @if(this.answersForm.value.answer === this.question.correct_answer && this.answersForm.value.answer === B.getAttribute("ng-reflect-value")) {
+                        <i class="fa-solid fa-circle-check text-[#006100cd]"></i>
+                    }
+                    @else if(this.answersForm.value.answer !== this.question.correct_answer && this.answersForm.value.answer !== "" && this.answersForm.value.answer === B.getAttribute("ng-reflect-value")) {
+                        <i class="fa-solid fa-circle-xmark text-[#771000e8]"></i>
+                    }
+                    @else {
+                        <i class="fa-regular fa-circle"></i>
+                    }
+                </div>
+                <div class="w-full h-14 px-6 font-semibold text-xl rounded-xl shadow-lg flex justify-between items-center bg-white relative cursor-pointer hover:bg-slate-300 transition-all">
+                    <input class="w-full h-full cursor-pointer rounded-lg appearance-none absolute top-0 left-0 disabled:cursor-not-allowed" type="radio" name="answer" [value]="this.answers[2]" (click)="choseAnswer($event)" formControlName="answer" #C>
+                    <span>{{this.answers[2] | filterString}}</span>
+                    @if(this.answersForm.value.answer === this.question.correct_answer && this.answersForm.value.answer === C.getAttribute("ng-reflect-value")) {
+                        <i class="fa-solid fa-circle-check text-[#006100cd]"></i>
+                    }
+                    @else if(this.answersForm.value.answer !== this.question.correct_answer && this.answersForm.value.answer !== "" && this.answersForm.value.answer === C.getAttribute("ng-reflect-value")) {
+                        <i class="fa-solid fa-circle-xmark text-[#771000e8]"></i>
+                    }
+                    @else {
+                        <i class="fa-regular fa-circle"></i>
+                    }
+                </div>
+                <div class="w-full h-14 px-6 font-semibold text-xl rounded-xl shadow-lg flex justify-between items-center bg-white relative cursor-pointer hover:bg-slate-300 transition-all">
+                    <input class="w-full h-full cursor-pointer rounded-lg appearance-none absolute top-0 left-0 disabled:cursor-not-allowed" type="radio" name="answer" [value]="this.answers[3]" (click)="choseAnswer($event)" formControlName="answer" #D>
+                    <span>{{this.answers[3] | filterString}}</span>
+                    @if(this.answersForm.value.answer === this.question.correct_answer && this.answersForm.value.answer === D.getAttribute("ng-reflect-value")) {
+                        <i class="fa-solid fa-circle-check text-[#006100cd]"></i>
+                    }
+                    @else if(this.answersForm.value.answer !== this.question.correct_answer && this.answersForm.value.answer !== "" && this.answersForm.value.answer === D.getAttribute("ng-reflect-value")) {
+                        <i class="fa-solid fa-circle-xmark text-[#771000e8]"></i>
+                    }
+                    @else {
+                        <i class="fa-regular fa-circle"></i>
+                    }
+                </div>
+                <button class="w-full lg:w-1/2 mx-auto rounded-xl bg-[#004643] px-2 py-3 text-xl font-semibold transition-all hover:bg-[#1d6b67] text-white disabled:cursor-not-allowed" [disabled]="answersForm.invalid" type="submit" (click)="nextQuestion()">Next</button>
+            </form>
+        </div>
+    </div>
+</div>
